@@ -1,0 +1,97 @@
+Conocemos algunas estructuras de datos como son los vectores y matrices. No son las únicas. Hay muchas situaciones donde utilizar alguna de estas estructuras nos proporcionará una solución muy ineficiente (cantidad de espacio que ocupa en memoria, velocidad de acceso a la información, etc.)
+
+Ejemplo 1. Imaginemos que debemos realizar un procesador de texto, debemos elegir la estructura de datos para almacenar en memoria las distintas líneas que el operador irá tipeando. Una solución factible es utilizar una matriz de caracteres. Pero como sabemos debemos especificar la cantidad de filas y columnas que ocupará de antemano. Podría ser por ejemplo 2000 filas y 200 columnas. Con esta definición estamos reservando de antemano 800000 bytes de la memoria, no importa si el operador después carga una línea con 20 caracteres, igualmente ya se ha reservado una cantidad de espacio que permanecerá ociosa.
+
+Tiene que existir alguna estructura de datos que pueda hacer más eficiente la solución del problema anterior.
+
+Ejemplo 2. ¿Cómo estarán codificadas las planillas de cálculo? ¿Reservarán espacio para cada casilla de la planilla al principio? Si no la lleno, ¿lo mismo se habrá reservado espacio?
+Utilizar una matriz para almacenar todas las casillas de una planilla de cálculo seguro será ineficiente.
+
+Bien, todos estos problemas y muchos más podrán ser resueltos en forma eficiente cuando conozcamos estas nuevas estructuras de datos (Listas, árboles)
+
+
+
+
+
+
+
+
+Una lista es un conjunto de nodos, cada uno de los cuales tiene dos campos: uno de información y un apuntador al siguiente nodo de la lista. Además un apuntador externo señala el primer nodo de la lista.
+
+Representación gráfica de un nodo:
+
+Nodo
+La información puede ser cualquier tipo de dato simple, estructura de datos o inclusive uno o más objetos.
+La dirección al siguiente nodo es un puntero.
+
+Representación gráfica de una lista:
+
+lista
+Como decíamos, una lista es una secuencia de nodos (en este caso cuatro nodos). La información de los nodos en este caso es un entero y siempre contiene un puntero que guarda la dirección del siguiente nodo.
+raiz es otro puntero externo a la lista que contiene la dirección del primer nodo.
+
+El estado de una lista varía durante la ejecución del programa:
+
+lista vacia
+De esta forma representamos gráficamente una lista vacía.
+
+Si insertamos un nodo en la lista quedaría luego:
+
+lista con un nodo
+Si insertamos otro nodo al principio con el valor 9 tenemos:
+
+lista con dos nodos
+Lo mismo podemos borrar nodos de cualquier parte de la lista.
+Esto nos trae a la mente el primer problema planteado: el desarrollo del procesador de texto. Podríamos utilizar una lista que inicialmente estuviera vacía e introdujéramos un nuevo nodo con cada línea que tipea el operador. Con esta estructura haremos un uso muy eficiente de la memoria.
+
+Tipos de listas.
+Según el mecanismo de inserción y extracción de nodos en la lista tenemos los siguientes tipos:
+
+Listas tipo pila.
+Listas tipo cola.
+Listas genéricas.
+Una lista se comporta como una pila si las inserciones y extracciones las hacemos por un mismo lado de la lista. También se las llama listas LIFO (Last In First Out - último en entrar primero en salir)
+
+Una lista se comporta como una cola si las inserciones las hacemos al final y las extracciones las hacemos por el frente de la lista. También se las llama listas FIFO (First In First Out - primero en entrar primero en salir)
+
+Una lista se comporta como genérica cuando las inserciones y extracciones se realizan en cualquier parte de la lista.
+Podemos en algún momento insertar un nodo en medio de la lista, en otro momento al final, borrar uno del frente, borrar uno del fondo o uno interior, etc.
+
+
+En Java, cuando no ponés un modificador de acceso (como public, protected o private), se aplica el modificador por defecto llamado package‑private. Eso significa que la clase o miembro solo es accesible dentro del mismo paquete.
+
+En tu caso:
+java
+class Nodo {
+    int info;
+    Nodo sig;
+}
+Nodo es una clase interna (inner class) dentro de Pila.
+
+Al no poner modificador, esa clase interna tiene visibilidad package‑private.
+
+Además, como es inner class no estática, solo puede instanciarse desde una instancia de Pila y por código que esté en el mismo paquete.
+
+En la práctica:
+
+Ningún código fuera del paquete podrá referirse directamente a Nodo.
+
+Y aunque estuviera en el mismo paquete, si Nodo es solo para uso interno de Pila, no tiene sentido exponerlo públicamente.
+
+🔹 Por qué se suele dejar sin modificador en este patrón
+Encapsulación lógica: Nodo es un detalle interno de implementación de Pila, no parte de su API pública.
+
+Menos superficie expuesta: evita que otro código dependa de Nodo directamente.
+
+Seguridad y mantenimiento: si cambiás la estructura de Nodo, no rompes código externo porque nadie fuera debería usarlo.
+
+💡 Extra: Podrías incluso marcarlo private para hacerlo todavía más encapsulado:
+
+java
+private class Nodo {
+    int info;
+    Nodo sig;
+}
+Esto haría que solo Pila (ni siquiera otras clases del paquete) pudiera usar Nodo.
+
+Si querés, te puedo mostrar un diagrama rápido de cómo se ven las relaciones de accesibilidad entre Pila, Nodo y otras clases según el modificador que uses. Te serviría para visualizarlo mejor?

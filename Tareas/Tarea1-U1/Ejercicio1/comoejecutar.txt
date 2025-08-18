@@ -1,0 +1,17 @@
+Cómo solucionarlo en tu caso
+Ubicate en la carpeta raíz del paquete Esa carpeta debe ser la que contiene la carpeta g60 (no te metas dentro de g60\minibrow para compilar si vas a ejecutar con paquete). Por lo que pusiste, sería:
+
+powershell
+cd "B:\IIN\AlgoritmosIII\GLesmePY-Java\Tareas\Tarea1-U1\Ejercicio1\v2\g60_tarea1\g60_tarea1\Ejercicio1"
+Compilá forzando UTF‑8 Esto le dice a javac que interprete bien la ñ y los acentos:
+
+powershell
+javac -encoding UTF-8 g60\minibrow\Lista.java g60\minibrow\Pila.java g60\minibrow\Minibrow.java
+También podrías usar comodín:
+
+powershell
+javac -encoding UTF-8 g60\minibrow\*.java
+Ejecutá respetando el paquete Desde esa misma carpeta (la que contiene g60):
+
+powershell
+java g60.minibrow.Minibrow https://www.ejemplo.com

@@ -1,4 +1,4 @@
-//NO FUNCIONAL
+//FUNCIONAL
 
 public class ListaSimplementeEnlazada {
 	private class Nodo {
@@ -12,10 +12,10 @@ public class ListaSimplementeEnlazada {
 	
 	private Nodo cabeza = null;
 	private int longitud = 0;
-	
+	/*//No necesario
 	public ListaSimplementeEnlazada (){
 		cabeza=null;
-	}
+	} */
 	
 	public void insertarInicio (int x){
 		Nodo temporal = new Nodo (x);
@@ -40,14 +40,16 @@ public class ListaSimplementeEnlazada {
 	}
 	
 	public void insertar (int n, int x){
-		Nodo temporal = new Nodo (x);
-		if (n == 0){
-			insertarInicio(x);
-		} else {
-			Nodo actual = index(n-1);
-			temporal.siguiente = actual.siguiente;
-			actual.siguiente = temporal;
-			longitud++;
+		if (n>=0 && n<=longitud){
+			Nodo temporal = new Nodo (x);
+			if (n == 0){
+				insertarInicio(x);
+			} else {
+				Nodo actual = index(n-1);
+				temporal.siguiente = actual.siguiente;
+				actual.siguiente = temporal;
+				longitud++;
+			}
 		}
 	}
 	
@@ -97,6 +99,16 @@ public class ListaSimplementeEnlazada {
 		return longitud;
 	}
 	
+	public void intercambiarIndex (int n, int x){
+		Nodo a0 = index(n);
+		Nodo a1 = index(x);
+		if (a0!=null && a1!=null){
+			int aux = a0.elemento;
+			a0.elemento = a1.elemento;
+			a1.elemento = aux;	
+		}
+	}
+	
 	public static void main (String [] args){
 		ListaSimplementeEnlazada listaUno = new ListaSimplementeEnlazada ();
 		for (int x = 0; x<10; x++){
@@ -107,6 +119,8 @@ public class ListaSimplementeEnlazada {
 		listaUno.imprimir();
 		int as = listaUno.len();
 		listaUno.eliminarIndex(as);
+		listaUno.imprimir();
+		listaUno.insertar(listaUno.len(),15);
 		listaUno.imprimir();
 	}
 }
